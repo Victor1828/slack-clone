@@ -1,12 +1,12 @@
 {
   "development": {
-    "username": "sfleet",
-    "password": "sfleet",
+    "username": "vega",
+    "password": null,
     "database": "slack",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "define": {
-      "freezeTableName": true
+      "underscored": true
     }
   },
   "test": {

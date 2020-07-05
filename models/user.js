@@ -1,5 +1,7 @@
 import { DataTypes } from 'sequelize'
 import sequelize from '../config/db'
+import Team from './team'
+// import Message from './message'
 
 const User = sequelize.define('User', {
   username: {
@@ -12,5 +14,9 @@ const User = sequelize.define('User', {
   },
   password: DataTypes.STRING
 })
+
+User.belongsToMany(Team, { through: 'members' })
+// User.hasMany(Message)
+User.hasMany(Team, { foreignKey: 'owner' })
 
 export default User

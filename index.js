@@ -1,15 +1,22 @@
 import express from 'express'
-import { ApolloServer } from 'apollo-server-express';
-import { typeDefs } from './schema';
-import { resolvers } from './resolvers'
-import db from './models';
+import { ApolloServer } from 'apollo-server-express'
+import db from './models'
+import path from 'path'
+import { loadFilesSync, mergeTypeDefs, mergeResolvers } from 'graphql-tools'
+
+const typesArray = loadFilesSync(path.join(__dirname, './types'))
+const typeDefs = mergeTypeDefs(typesArray, { all: true })
+
+const resolversArray = loadFilesSync(path.join(__dirname, './resolvers'));
+const resolvers = mergeResolvers(resolversArray);
 
 const app = express()
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-});
+  context: { models: db.sequelize.models }
+})
 
 server.applyMiddleware({ app });
 
