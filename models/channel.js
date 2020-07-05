@@ -6,11 +6,18 @@ import User from './user'
 
 const Channel = sequelize.define('Channel', {
   name: DataTypes.STRING,
-  public: DataTypes.BOOLEAN
+  public: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  }
 })
 
-Channel.belongsTo(Team)
-Channel.hasMany(Message)
+Channel.belongsTo(Team, {
+  foreignKey: { allowNull: false }
+})
+Channel.hasMany(Message, {
+  foreignKey: { allowNull: false }
+})
 Channel.belongsToMany(User, { through: 'channel_members' })
 
 export default Channel

@@ -17,6 +17,11 @@ const User = sequelize.define('User', {
 
 User.belongsToMany(Team, { through: 'members' })
 // User.hasMany(Message)
-User.hasMany(Team, { foreignKey: 'owner' })
+User.hasMany(Team, {
+  foreignKey: {
+    name: 'owner',
+    allowNull: false
+  }
+})
 
 export default User

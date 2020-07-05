@@ -15,7 +15,10 @@ const app = express()
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: { models: db.sequelize.models }
+  context: {
+    models: db.sequelize.models,
+    user: { id: 1 }
+  }
 })
 
 server.applyMiddleware({ app });

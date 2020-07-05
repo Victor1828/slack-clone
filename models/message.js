@@ -7,7 +7,9 @@ const Message = sequelize.define('Message', {
   text: DataTypes.STRING
 })
 
-Message.belongsTo(User)
+Message.belongsTo(User, {
+  foreignKey: { allowNull: false }
+})
 // Message.belongsTo(Channel)
 
 export default Message
