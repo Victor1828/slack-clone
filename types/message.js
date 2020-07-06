@@ -8,4 +8,8 @@ export default gql`
     channel: Channel!
     createdAt: String!
   }
+
+  type Mutation {
+    createMessage(text: String!, ChannelId: Int!): Message!
+  }
 `

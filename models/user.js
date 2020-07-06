@@ -12,7 +12,8 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     unique: true
   },
-  password: DataTypes.STRING
+  password: DataTypes.STRING,
+  salt: DataTypes.STRING
 })
 
 User.belongsToMany(Team, { through: 'members' })
