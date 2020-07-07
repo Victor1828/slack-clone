@@ -6,11 +6,23 @@ import Team from './team'
 const User = sequelize.define('User', {
   username: {
     type: DataTypes.STRING,
-    unique: true
+    unique: true,
+    validate: {
+      len: {
+        args: [3, 25],
+        msg: 'Username must be between 3 and 25 characters long'
+      }
+    }
   },
   email: {
     type: DataTypes.STRING,
-    unique: true
+    unique: true,
+    validate: {
+      isEmail: {
+        args: true,
+        msg: 'Email must be a valid email'
+      },
+    }
   },
   password: DataTypes.STRING,
   salt: DataTypes.STRING
