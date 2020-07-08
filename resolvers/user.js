@@ -1,4 +1,5 @@
 import crypto from 'crypto'
+import { login } from '../auth'
 
 const formatErrors = error => {
   if (error.name) {
@@ -14,6 +15,7 @@ export default {
     getAllUsers: (parent, args, { models }, info) => models.User.findAll()
   },
   Mutation: {
+    login: (parent, { email, password }, { models }, info) => login(email, password, models),
     registerUser: async (parent, { ...otherArgs, password }, { models }, info) => {
       const salt = crypto.randomBytes(16).toString('hex')
       const hashedPassword = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex')
